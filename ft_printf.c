@@ -6,7 +6,7 @@
 /*   By: mousaidi <mousaidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 14:05:40 by mousaidi          #+#    #+#             */
-/*   Updated: 2026/11/22 18:41:46 by mousaidi         ###   ########.fr       */
+/*   Updated: 2026/11/25 17:55:34 by mousaidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,31 @@ int	ft_printf(const char *str, ...)
 	size_t	i;
 	char	*substr;
 	va_list	ap;
-	size_t	j;
+	size_t	num_prin;
 
 	i = 0;
 	va_start(ap, str);
-	j = 0;
+	num_prin = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%' && str[i + 1] == '%')
 		{
-			write(1, '%', 1);
+			ft_putchar_fd('%', 1);
 			i += 2;
 		}
 		else if (str[i] == '%')
 		{
 			substr = extract_format(str, i);
-			j = write_function(substr, j, &ap);
+			num_prin = write_function(substr, num_prin, &ap);
 			i += ft_strlen(substr);
+			free(substr);
 		}
 		else
 		{
-			write(1, str[i], 1);
+			ft_putchar_fd(str[i], 1);
 			i++;
 		}
-		j++;
+		num_prin++;
 	}
-	return (j);
+	return (num_prin);
 }

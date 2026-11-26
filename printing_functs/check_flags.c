@@ -6,7 +6,7 @@
 /*   By: mousaidi <mousaidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/23 10:20:07 by mousaidi          #+#    #+#             */
-/*   Updated: 2026/11/23 10:51:48 by mousaidi         ###   ########.fr       */
+/*   Updated: 2026/11/26 14:41:23 by mousaidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,28 @@ static int	*assign_flags(char c, int *flags)
 	else if (c == '+')
 		flags[3] = 1;
 	else if (c == ' ')
-		flags[4] == 1;
+		flags[4] = 1;
 	return (flags);
 }
 
 int	*check_flags(char *s)
 {
 	size_t	i;
-	int	flags[7];
+	int	*flags;
 
-	flags = {0, 0, 0, 0, 0, 0, 0};
-	i = 0;
-	while (check_if_flag(str[i]))
+	flags = malloc(sizeof(int) * 7);
+	if (!flags)
+		return (NULL);
+	ft_bzero(flags, sizeof(flags));
+	flags[6] = -1;
+	i = 1;
+	while (check_if_flag(s[i]))
 	{
-		flags = assign_flags(str[i], flags);
+		flags = assign_flags(s[i], flags);
 		i++;
 	}
 	flags[5] = ft_atoi(&s[i]);
-	while (ft_isdigit((int)str[i]))
+	while (ft_isdigit((int)s[i]))
 		i++;
 	if (s[i] == '.')
 	{

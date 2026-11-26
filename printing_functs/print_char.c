@@ -6,7 +6,7 @@
 /*   By: mousaidi <mousaidi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/22 23:02:12 by mousaidi          #+#    #+#             */
-/*   Updated: 2026/11/23 12:31:55 by mousaidi         ###   ########.fr       */
+/*   Updated: 2026/11/25 17:52:11 by mousaidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,16 @@ if no number provided, it will be 0.
 size_t	print_char(char *substr, size_t num_print, va_list *ap)
 {
 	int	*flags;
-	char	pad_char;
+	char	*final_str;
 	char	c;
-	int	i;
-	
+	size_t	len;
+
 	flags = check_flags(substr);
 	c = va_arg(*ap, int) + '0';
-	pad_char = ' ';
-	print_with_padd(c, flags[0], pad_char, flags[5]);
-	return (num_print + (size_t)width);
-}
-
-static void	print_with_padd(char c, int rev, char padd_char, int len)
-{
-	int	i;
-
-	i = 0;
-	if (rev)
-		write(1, &c, 1);
-	while (i < len - 1)
-	{
-		write(1, padd_char, 1);
-		i++;
-	}
-	if (!rev)
-		write(1, &c, 1);
+	final_str = apply_padd(&c, flags[0], flags[1], flags[5]);
+	ft_putstr_fd(final_str, 1);
+	len = ft_strlen(final_str);
+	free(final_str);
+	free(flags);
+	return (num_print + len);
 }
