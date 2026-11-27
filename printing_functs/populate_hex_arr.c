@@ -44,13 +44,14 @@ char	*populate_hex_arr(int is_upp)
 	i = 0;
 	while (i < 10)
 	{
-		base_16[i] = i - '0';
+		base_16[i] = i + '0';
 		i++;
 	}
-	while (i < 17)
+	while (i < 16)
 	{
 		base_16[i] = add_num_rep(i, is_upp);
 		i++;
 	}
+	base_16[i] = '\0';
 	return (base_16);
 }

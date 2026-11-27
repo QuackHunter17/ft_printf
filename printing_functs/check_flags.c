@@ -34,6 +34,17 @@ static int	*assign_flags(char c, int *flags)
 	return (flags);
 }
 
+static void	fill_with_zero(int *flags)
+{
+	int	i;
+
+	i = 0;
+	while (i < 7)
+	{
+		flags[i] = 0;
+		i++;
+	}
+}
 int	*check_flags(char *s)
 {
 	size_t	i;
@@ -42,7 +53,7 @@ int	*check_flags(char *s)
 	flags = malloc(sizeof(int) * 7);
 	if (!flags)
 		return (NULL);
-	ft_bzero(flags, sizeof(flags));
+	fill_with_zero(flags);
 	flags[6] = -1;
 	i = 1;
 	while (check_if_flag(s[i]))
@@ -60,3 +71,4 @@ int	*check_flags(char *s)
 	}
 	return (flags);
 }
+

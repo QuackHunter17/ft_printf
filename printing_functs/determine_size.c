@@ -19,7 +19,7 @@ size_t	determine_size(unsigned int num)
 	size_t	size;
 
 	size = 0;
-	if (num = 0)
+	if (num == 0)
 		return (1);
 	while (num > 0)
 	{

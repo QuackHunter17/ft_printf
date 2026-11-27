@@ -14,6 +14,8 @@
 
 //flags[] = {-, 0, #, +, (space), width, .};
 
+static char	*populate_new_str(char *s1, char *s2, size_t s2_len);
+
 char	*apply_sign(char *s, int plus_flag, int space_flag, int is_neg)
 {
 	char	*str_with_sign;
@@ -28,12 +30,7 @@ char	*apply_sign(char *s, int plus_flag, int space_flag, int is_neg)
 		free(s);
 		return (NULL);
 	}
-	str_with_sign[s_len + 2] = '\0';
-	while (s_len > 0)
-	{
-		s_len--;
-		str_with_sign[s_len + 1] = s[s_len];
-	}
+	str_with_sign = populate_new_str(str_with_sign, s, s_len);
 	if (is_neg)
 		str_with_sign[0] = '-';
 	else if (plus_flag)
@@ -42,4 +39,16 @@ char	*apply_sign(char *s, int plus_flag, int space_flag, int is_neg)
 		str_with_sign[0] = ' ';
 	free(s);
 	return (str_with_sign);
+}
+
+static char	*populate_new_str(char *s1, char *s2, size_t s2_len)
+{
+	s1[s2_len + 1] = '\0';
+	while (s2_len > 0)
+	{
+		s2_len--;
+		s1[s2_len + 1] = s2[s2_len];
+	}
+	s1[s2_len + 1] = s2[s2_len];
+	return (s1);
 }

@@ -23,13 +23,13 @@ char	*num_to_hex(unsigned int num, char *base_16)
 	ret_str = malloc(sizeof(char) * (size + 1));
 	if (!ret_str)
 		return (NULL);
-	i = 0;
-	while (i < size)
+	i = size;
+	while (i > 0)
 	{
+		i--;
 		ret_str[i] = base_16[num % 16];
 		num /= 16;
-		i++;
 	}
-	ret_str[i] = '\0';
+	ret_str[size] = '\0';
 	return (ret_str);
 }
